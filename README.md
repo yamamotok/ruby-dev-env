@@ -1,23 +1,25 @@
 # Create Ruby development environment on Windows
 
-The main purpose of this repo is to create Ruby(rbenv) environment on Windows.b
-I want to use it with IntelliJ.
+The main purpose of this repo is to create a Docker container with Ruby interpreter,
+which is installed through *rbenv*.
+
+The container is supposed to be used as development environment with IntelliJ (RubyMine) on Windows.
 
 ## Build Docker image, Run Docker container
 
-Try to build a Docker image.
+By using `main.sh` script, you can build a Docker image.
 
 ```bash
 ./main.sh build
 ```
 
-Next, run a container.
+Also run the container.
 
 ```bash
 ./main.sh run
 ```
 
-You can login;
+You can login it;
 
 ```bash
 user@localhost -p 2222
@@ -26,7 +28,7 @@ user@localhost -p 2222
 
 ## Setup rbenv in the container
 
-After the first login, setup `rbenv` by executing `rbenv_setup.sh` script
+After the first login, you have to setup `rbenv` by executing `rbenv_setup.sh` script
 which has been copied in home directory already.
 
 ```bash
@@ -34,7 +36,7 @@ which has been copied in home directory already.
 ./rbenv_setup.sh
 ```
 
-Need to apply changes;
+After it finished, need to apply changes;
 
 ```bash
 source .profile
@@ -53,3 +55,16 @@ mkdir ~/my_project
 cd ~/my_project
 rbenv local 2.4.1
 ```
+
+## With IntelliJ (RubyMine)
+
+Need to setup these things.
+
+- Deployment configuration
+- Remote interpreter
+
+There is a important thing about the path to remote interpreter,  
+you need to point `/home/user/.rbenv/versions/2.4.1/bin`  
+instead of `/home/user/.rbenv/shims/ruby`.  
+Otherwise gems cannot be recognized.
+
