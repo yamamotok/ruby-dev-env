@@ -11,6 +11,7 @@ RUN apt-get install -y sudo tzdata vim less git
 
 # For general development
 RUN apt-get install -y sqlite3 libsqlite3-dev
+RUN apt-get install -y libmysqld-dev mysql-client
 
 # Timezone
 ENV TZ='/usr/share/zoneinfo/Asia/Tokyo'
