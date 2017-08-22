@@ -22,16 +22,12 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
 RUN mkdir /var/run/sshd
 RUN sed -i 's/^#PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
 # Create user
 ADD ./include/create_user.sh /create_user.sh
 RUN chmod 0755 /create_user.sh
 RUN /create_user.sh
 ADD ./include/rbenv_setup.sh /home/user/rbenv_setup.sh
-RUN chown user /home/user/rbenv_setup.sh
-RUN chmod 0700 /home/user/rbenv_setup.sh
+RUN chown user /home/user/rbenv_setup.sh && chmod 0700 /home/user/rbenv_setup.sh
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
