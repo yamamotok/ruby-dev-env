@@ -12,7 +12,7 @@ build() {
 
 run() {
     docker rm -f ${CONTAINER_NAME}
-    docker run -d -p 2222:22 --name ${CONTAINER_NAME} ${IMAGE_NAME}
+    docker run -d -p 2222:22 -p 3000:3000 --name ${CONTAINER_NAME} ${IMAGE_NAME}
     sleep 2
     echo -e 'user:password' | docker exec -i ${CONTAINER_NAME} chpasswd
     echo 'Try `ssh user@localhost -p 2222` (password is "password")'

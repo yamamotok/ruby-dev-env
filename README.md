@@ -60,11 +60,8 @@ rbenv local 2.4.1
 
 Need to setup these things.
 
-- Deployment configuration
 - Remote interpreter
+- Deployment configuration
 
-There is a important thing about the path to remote interpreter,  
-you need to point `/home/user/.rbenv/versions/2.4.1/bin`  
-instead of `/home/user/.rbenv/shims/ruby`.  
-Otherwise gems cannot be recognized.
-
+As the remote interpreter, you need to point `/home/user/.rbenv/versions/2.4.1/bin`
+instead of `/home/user/.rbenv/shims/ruby`, otherwise gems cannot be recognized.
