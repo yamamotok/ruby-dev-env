@@ -18,6 +18,13 @@ run() {
     echo 'Try `ssh user@localhost -p 2222` (password is "password")'
 }
 
+commit() {
+    docker commit ${CONTAINER_NAME} "${IMAGE_NAME}:temp"
+    if [ $1 -a $1 == 'push' ]; then
+        docker push "${IMAGE_NAME}:temp"
+    fi
+}
+
 if [ $1 -a $1 == "build" ]; then
     if [ $2 -a $2 == "push" ]; then
         build 'push'
@@ -30,6 +37,11 @@ elif [ $1 -a $1 == "run" ]; then
         docker pull ${IMAGE_NAME}
     fi
     run
+elif [ $1 -a $1 == "commit" ]; then
+    if [ $2 -a $2 == "push" ]; then
+        commit 'push'
+    fi
+    commit
 else
-    echo 'Usage: ./main.sh (build|run)'
+    echo 'Usage: ./main.sh (build|run|commit)'
 fi
